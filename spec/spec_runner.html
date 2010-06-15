@@ -2,7 +2,7 @@
   "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-  <title>Features</title>
+  <title>Specs</title>
   <link rel="stylesheet" type="text/css" href="../lib/jasmine/lib/jasmine.css">
   <link rel="stylesheet" type="text/css" href="../public/ball_dragger.css">
 
@@ -15,11 +15,10 @@
 
   <script type="text/javascript" src="../public/ball_dragger.js"></script>
 
-  <script type="text/javascript" src="../lib/jquery.simulate.js"></script>
-  <script type="text/javascript" src="playing_game.feature.js"></script>
+  <script type="text/javascript" src="start_button_spec.js"></script>
 </head>
 <body>
-<div id="game">
+<div id="game-template" style='display:none'>
   <input type='button' id="start-button"></input>
   <div id="results"></div>
   <div id="field">
@@ -29,11 +28,9 @@
 </div>
 
 <script type="text/javascript">
-$(function() {
   var jasmineEnv = jasmine.getEnv();
   jasmineEnv.reporter = new jasmine.TrivialReporter();
   jasmineEnv.execute();
-});
 </script>
 
 </body>

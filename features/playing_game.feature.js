@@ -1,16 +1,21 @@
 describe("playing the game", function() {
-  var gameBoard, field, ballSource, ballDestination, results;
+  var gameBoard, field, startButton, ballSource, ballDestination, results, ballDragger;
 
   function pressStartButton(){
     gameBoard.find("#start-button").click();
   }
 
   beforeEach(function() {
-    gameBoard = $("#game");
+    gameBoard = $("#game").clone();
     field = gameBoard.find("#field");
     ballSource = field.find("#ball-source");
     ballDestination = field.find("#ball-destination");
     results = gameBoard.find("#results");
+    startButton = gameBoard.find("#start-button");
+
+    ballDragger = BallDragger.initialize(gameBoard);
+
+    startButton.click(ballDragger.start);
   });
 
   describe("pressing the start button", function() {
