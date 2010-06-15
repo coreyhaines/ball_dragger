@@ -4,6 +4,8 @@
 <head>
   <title>Features</title>
   <link rel="stylesheet" type="text/css" href="../lib/jasmine/lib/jasmine.css">
+  <link rel="stylesheet" type="text/css" href="../public/ball_dragger.css">
+
   <script type="text/javascript" src="../lib/jasmine/lib/jasmine-0.10.4.js"></script>
   <script type="text/javascript" src="../lib/jasmine/lib/TrivialReporter.js"></script>
   <script type="text/javascript" src="../lib/jasmine/lib/consolex.js"></script>
@@ -11,7 +13,7 @@
   <script type="text/javascript" src="../lib/jquery-1.4.2.js"></script>
   <script type="text/javascript" src="../lib/jquery-ui-1.7.2.custom.min.js"></script>
 
-  <script type="text/javascript" src="../src/ball_dragger.js"></script>
+  <script type="text/javascript" src="../public/ball_dragger.js"></script>
 
   <script type="text/javascript" src="../lib/jquery.simulate.js"></script>
   <script type="text/javascript" src="playing_game.feature.js"></script>
@@ -22,6 +24,15 @@
   jasmineEnv.reporter = new jasmine.TrivialReporter();
   jasmineEnv.execute();
 </script>
+
+<div id="game">
+  <input type='button' id="start-button"></input>
+  <div id="results"></div>
+  <div id="field">
+    <div id="ball-source"></div>
+    <div id="ball-destination"</div>
+  </div>
+</div>
 
 </body>
 </html>
