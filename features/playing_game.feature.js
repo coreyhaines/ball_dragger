@@ -21,12 +21,17 @@ describe("playing the game", function() {
       expect(ball.length).toEqual(1);
     });
 
-    it("removes the old ball if pressed again", function() {
-      pressStartButton();
-      pressStartButton();
+    describe("pressing twice", function() {
+      it("resets the ball to the source", function() {
+        pressStartButton();
 
-      var ball = ballSource.find(".ball");
-      expect(ball.length).toEqual(1);
+        dragBallTo(ballDestination);
+
+        pressStartButton();
+
+        var ball = ballSource.find(".ball");
+        expect(ball.length).toEqual(1);
+      });
     });
   });
   
