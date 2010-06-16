@@ -2,7 +2,25 @@ describe("playing the game", function() {
   var gameBoard, field, startButton, ballSource, ballDestination, results, ballDragger;
 
   function pressStartButton(){
-    gameBoard.find("#start-button").click();
+    startButton.click();
+  }
+
+  function dragBallTo(thisContainer){
+    var destination, ball, dx, dy;
+    destination = thisContainer.offset();
+    ball = field.find(".ball");
+    ballPosition = ball.offset();
+
+    dx = destination.left - ballPosition.left + 5;
+    dy = destination.top - ballPosition.top + 5;
+
+    ball.simulate("drag", {
+      dx: dx,
+      dy: dy
+    });
+
+    thisContainer.append(ball);
+    ballDragger.scoreGame();
   }
 
   beforeEach(function() {
