@@ -5,18 +5,46 @@ BallDragger.initialize = function(gameBoard) {
   resultsDisplay = gameBoard.find("#results");
 
   function scoreGame(){
-    resultsDisplay.text("You Lose!"); 
+    var ballDestination = gameBoard.find("#ball-destination");
+    var ballPosition = ball.offset();
+    var destinationPosition = ballDestination.offset();
+    var ballHeight, ballWidth, destinationHeight, destinationWidth;
+
+    ballHeight = ball.height();
+    ballWidth = ball.width();
+
+    destinationHeight = ballDestination.height();
+    destinationWidth =  ballDestination.width();
+
+    // console.log(ballPosition);
+    // console.log(destinationPosition);
+
+    var inside = (ballPosition.left >= destinationPosition.left) &&
+                  (ballPosition.top >= destinationPosition.top) &&
+                  ((ballPosition.top + ballHeight) <= (destinationPosition.top + destinationHeight));
+
+    inside ? resultsDisplay.text("You Win!") : resultsDisplay.text("You Lose!"); 
   }
 
-  ball = $("<div class='ball'></div>");
-  ball.draggable({
-    containment: "#field",
-    stop: scoreGame
-  });
+  function createBall() {
+    ball = $("<div class='ball'></div>");
+    ball.draggable({
+      containment: "#field",
+      stop: scoreGame
+    });
+    return ball;
+  }
 
   ballSource = gameBoard.find("#ball-source");
   function setBallInSource(){
-    ballSource.append(ball); 
+    if(!ball) {
+      ball = createBall();
+      gameBoard.find("#field").append(ball);
+    }
+
+    ball.css("left", ballSource.offset().left + 10);
+    ball.css("top", ballSource.offset().top + 10);
+
   }
 
 

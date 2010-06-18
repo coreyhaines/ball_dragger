@@ -1,5 +1,5 @@
 describe("playing the game", function() {
-  var gameBoard, field, startButton, ballSource, ballDestination, results, ballDragger;
+  var cachedGameBoard, gameBoard, field, startButton, ballSource, ballDestination, results, ballDragger;
 
   function pressStartButton(){
     startButton.click();
@@ -11,20 +11,22 @@ describe("playing the game", function() {
     ball = field.find(".ball");
     ballPosition = ball.offset();
 
-    dx = destination.left - ballPosition.left + 5;
-    dy = destination.top - ballPosition.top + 5;
+    dx = destination.left - ballPosition.left;
+    dy = destination.top - ballPosition.top;
 
     ball.simulate("drag", {
       dx: dx,
       dy: dy
     });
 
-    thisContainer.append(ball);
-    ballDragger.scoreGame();
   }
 
   beforeEach(function() {
-    gameBoard = $("#game").clone();
+    cachedGameBoard = $("#game");
+    gameBoard = cachedGameBoard.clone();
+
+    cachedGameBoard.remove();
+    $("body").prepend(gameBoard);
     field = gameBoard.find("#field");
     ballSource = field.find("#ball-source");
     ballDestination = field.find("#ball-destination");
@@ -34,6 +36,11 @@ describe("playing the game", function() {
     ballDragger = BallDragger.initialize(gameBoard);
 
     startButton.click(ballDragger.start);
+  });
+
+  afterEach(function() {
+    gameBoard.remove();
+    $("body").prepend(cachedGameBoard);
   });
 
   describe("pressing the start button", function() {

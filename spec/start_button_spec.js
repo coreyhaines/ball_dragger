@@ -1,3 +1,21 @@
+beforeEach(function() {
+  this.addMatchers({
+    toBeInside: function(inThis) {
+      var actual = $(this.actual),
+          actualPosition = actual.offset(),
+          actualHeight = actual.height,
+          inThisPosition = inThis.offset(),
+          inThisHeight = inThis.height;
+          inside = false;
+
+      inside = (actualPosition.left >= inThisPosition.left) &&
+                  (actualPosition.top >= inThisPosition.top) &&
+                  ((actualPosition.top + actualHeight) <= (inThisPosition.top + inThisHeight));
+
+      return inside;
+    }
+  });
+});
 describe("pressing start button", function() {
   it("creates a ball in the source", function() {
     var gameBoard = $("#game-template").clone();
@@ -7,7 +25,7 @@ describe("pressing start button", function() {
 
     ballDragger.start();
 
-    expect(source.find(".ball").length).toEqual(1);
+    expect(gameBoard.find("#field .ball")).toBeInside(source);
   });
 
   describe("ball has moved", function() {
@@ -24,7 +42,7 @@ describe("pressing start button", function() {
 
       ballDragger.start();
 
-      expect(gameBoard.find(".ball").length).toEqual(1);
+      expect(gameBoard.find("#field .ball").length).toEqual(1);
     });
   });
 });
