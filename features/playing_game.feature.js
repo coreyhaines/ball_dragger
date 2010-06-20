@@ -25,8 +25,7 @@ describe("playing the game", function() {
     cachedGameBoard = $("#game");
     gameBoard = cachedGameBoard.clone();
 
-    cachedGameBoard.remove();
-    $("body").prepend(gameBoard);
+    cachedGameBoard.replaceWith(gameBoard);
     field = gameBoard.find("#field");
     ballSource = field.find("#ball-source");
     ballDestination = field.find("#ball-destination");
@@ -39,8 +38,7 @@ describe("playing the game", function() {
   });
 
   afterEach(function() {
-    gameBoard.remove();
-    $("body").prepend(cachedGameBoard);
+    gameBoard.replaceWith(cachedGameBoard);
   });
 
   describe("pressing the start button", function() {
